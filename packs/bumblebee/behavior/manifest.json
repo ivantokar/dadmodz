@@ -1,0 +1,30 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "DadModz Bumblebee",
+		"description": "DadModz Bumblebee Behavior Pack",
+		"uuid": "7db3d9b9-7e25-d24a-b3dd-aaf26ac968ff",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": {
+		"authors": ["DadModz"],
+		"generated_with": {
+			"blockbench_entity_wizard": ["1.8.3"]
+		}
+	},
+	"modules": [
+		{
+			"description": "Behavior",
+			"version": [1, 0, 0],
+			"uuid": "6b5421a7-8886-c5cb-59b2-23cc8ff099f1",
+			"type": "data"
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "2da15e3f-44db-4bf7-8769-7ed59fa85cb2",
+			"version": [1, 0, 0]
+		}
+	]
+}

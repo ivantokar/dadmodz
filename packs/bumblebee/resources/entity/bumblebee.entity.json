@@ -1,0 +1,45 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "dadmodz:bumblebee",
+			"materials": {
+				"default": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/entity/bumblebee/bumblebee",
+				"angry": "textures/entity/bumblebee/angry",
+				"nectar": "textures/entity/bumblebee/nectar",
+				"angry_nectar": "textures/entity/bumblebee/angry_nectar"
+			},
+			"geometry": {
+				"default": "geometry.bumblebee"
+			},
+			"animations": {
+				"flying": "animation.bumblebee.flying",
+				"drip": "controller.animation.bee.drip",
+				"controller_bee_sting": "controller.animation.bee.sting",
+				"bee_sting": "animation.bumblebee.sting",
+				"bee_no_stinger": "animation.bumblebee.no_stinger",
+				"bee_fly_bobbing": "animation.bumblebee.fly.bobbing",
+				"bee_root_controller": "controller.animation.bee.root"
+			},
+			"particle_effects": {
+				"nectar_dripping": "minecraft:nectar_drip_particle"
+			},
+			"scripts": {
+				"animate": [
+					"bee_root_controller",
+					{
+						"bee_no_stinger": "query.mark_variant == 1"
+					}
+				]
+			},
+			"render_controllers": ["controller.render.bee"],
+			"spawn_egg": {
+				"base_color": "#ff9e00",
+				"overlay_color": "#915300"
+			}
+		}
+	}
+}
