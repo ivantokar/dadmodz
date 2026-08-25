@@ -1,0 +1,34 @@
+{
+  "name": "dadmodz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minecraft Bedrock add-ons by DadModz",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint scripts/src",
+    "typecheck": "tsc --noEmit",
+    "script:build": "node tools/build-script-api.mjs",
+    "validate:json": "node tools/validate-json.mjs",
+    "validate": "MCTOOLS_DATA_DIR=.mctools mct validate addon -i .",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run validate:json && npm run validate",
+    "package": "npm run validate:json && node tools/package-mcaddon.mjs",
+    "release": "npm run check && npm run package"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "@minecraft/creator-tools": "0.17.7",
+    "@minecraft/server": "2.9.0",
+    "archiver": "^8.0.0",
+    "esbuild": "^0.25.8",
+    "eslint": "^9.34.0",
+    "eslint-plugin-minecraft-linting": "^2.0.12",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.42.0"
+  }
+}

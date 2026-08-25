@@ -4,13 +4,25 @@
 		"name": "DadModz Bumblebee",
 		"description": "DadModz Bumblebee Resource Pack",
 		"uuid": "2da15e3f-44db-4bf7-8769-7ed59fa85cb2",
-		"version": [1, 0, 0],
-		"min_engine_version": [1, 16, 0]
+		"version": [
+			1,
+			0,
+			7
+		],
+		"min_engine_version": [
+			1,
+			16,
+			0
+		]
 	},
 	"metadata": {
-		"authors": ["DadModz"],
+		"authors": [
+			"DadModz"
+		],
 		"generated_with": {
-			"blockbench_entity_wizard": ["1.8.3"]
+			"blockbench_entity_wizard": [
+				"1.8.3"
+			]
 		}
 	},
 	"modules": [
@@ -18,7 +30,11 @@
 			"description": "DadModz Bumblebee",
 			"type": "resources",
 			"uuid": "e5bb4e04-c547-78ac-4b9a-c3e56313a85d",
-			"version": [1, 0, 0]
+			"version": [
+				1,
+				0,
+				7
+			]
 		}
 	]
 }

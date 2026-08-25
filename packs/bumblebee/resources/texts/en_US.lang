@@ -1,2 +1,3 @@
 entity.dadmodz:bumblebee.name=Bumblebee
-item.spawn_egg.entity.dadmodz:bumblebee.name=Spawn Bumblebee
+item.spawn_egg.entity.dadmodz:bumblebee.name=Bumblebee Spawn Egg
+action.interact.dadmodz.bumblebee=Give Flower

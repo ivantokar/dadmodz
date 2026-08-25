@@ -1,0 +1,3 @@
+entity.dadmodz:bumblebee.name=Джмелик
+item.spawn_egg.entity.dadmodz:bumblebee.name=Яйце призову Джмелика
+action.interact.dadmodz.bumblebee=Дати квітку
