@@ -33,6 +33,9 @@
 			}
 		},
 		"components": {
+			"minecraft:attack": {
+				"damage": 1
+			},
 			"minecraft:is_hidden_when_invisible": {},
 			"minecraft:type_family": {
 				"family": ["allay", "mob"]
@@ -198,21 +201,16 @@
 				"start_distance": 16,
 				"stop_distance": 4
 			},
-			"minecraft:behavior.nearest_attackable_target": {
-				"priority": 5,
-				"must_see": true,
-				"reselect_targets": true,
-				"within_radius": 16,
-				"entity_types": [
-					{
-						"filters": {
-							"test": "is_family",
-							"subject": "other",
-							"value": "monster"
-						},
-						"max_dist": 16
-					}
-				]
+			"minecraft:behavior.owner_hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:behavior.owner_hurt_target": {
+				"priority": 2
+			},
+			"minecraft:behavior.melee_attack": {
+				"priority": 3,
+				"speed_multiplier": 2,
+				"track_target": true
 			},
 			"minecraft:behavior.follow_owner": {
 				"priority": 6,
