@@ -6,7 +6,7 @@ import { build } from 'esbuild';
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const scriptTargets = [
 	{
-		source: 'scripts/src/main.ts',
+		source: 'scripts/src/bumblebee.ts',
 		output: 'packs/bumblebee/behavior/scripts/main.js'
 	},
 	{

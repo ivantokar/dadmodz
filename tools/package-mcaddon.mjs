@@ -20,6 +20,20 @@ const addOns = [
 		resources: 'super-pickaxe_RP'
 	}
 ];
+const requestedAddOn = process.argv.slice(2);
+
+if (requestedAddOn.length > 1) {
+	throw new Error(`Expected at most one add-on name, received: ${requestedAddOn.join(', ')}`);
+}
+
+const addOnsToPackage =
+	requestedAddOn.length === 0 ? addOns : addOns.filter((addOn) => addOn.name === requestedAddOn[0]);
+
+if (addOnsToPackage.length === 0) {
+	throw new Error(
+		`Unknown add-on "${requestedAddOn[0]}". Choose one of: ${addOns.map(({ name }) => name).join(', ')}`
+	);
+}
 
 function formatVersion(version) {
 	return version.join('.');
@@ -117,7 +131,7 @@ function validateSynchronizedManifests(addOn, behaviorManifest, resourceManifest
 	}
 }
 
-for (const addOn of addOns) {
+for (const addOn of addOnsToPackage) {
 	const sourceRoot = path.join(packsRoot, addOn.name);
 	const behaviorManifestPath = path.join(sourceRoot, 'behavior', 'manifest.json');
 	const resourceManifestPath = path.join(sourceRoot, 'resources', 'manifest.json');

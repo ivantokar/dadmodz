@@ -1,5 +1,7 @@
 # DadModz
 
+![DadModz logo](./logo.png)
+
 Minecraft Bedrock add-ons: Bumblebee and Super Pickaxe.
 
 ## Requirements
@@ -20,6 +22,8 @@ npm run format          # Format JSON, TypeScript, and project config
 npm run check           # Format, lint, type-check, and Bedrock validation
 npm run script:build    # Bundle both Script API TypeScript sources for their behavior packs
 npm run package         # Increment each add-on patch, then create both dist/*.mcaddon files
+npm run package -- bumblebee       # Increment and package Bumblebee only
+npm run package -- super-pickaxe   # Increment and package Super Pickaxe only
 npm run release         # Check, then package
 ```
 
@@ -31,10 +35,10 @@ To build both Script API bundles without changing any pack versions, run:
 npm run script:build
 ```
 
-This creates the separate behavior-pack scripts:
+This builds each add-on source into its separate behavior-pack script:
 
-- `packs/bumblebee/behavior/scripts/main.js`
-- `packs/super-pickaxe/behavior/scripts/main.js`
+- `scripts/src/bumblebee.ts` → `packs/bumblebee/behavior/scripts/main.js`
+- `scripts/src/super-pickaxe.ts` → `packs/super-pickaxe/behavior/scripts/main.js`
 
 To create installable add-ons, run:
 
@@ -49,8 +53,20 @@ two files to `dist/`:
 - `bumblebee-v<version>.mcaddon`
 - `super-pickaxe-v<version>.mcaddon`
 
-Run it only when you intend to create a new version: each invocation increments
-both add-ons. Bumblebee and Super Pickaxe remain separate `.mcaddon` installs.
+Run it only when you intend to create a new version: with no add-on name, it
+increments both add-ons.
+
+### Package one add-on
+
+To bump and archive just one add-on, pass its name after `--`:
+
+```sh
+npm run package -- bumblebee
+npm run package -- super-pickaxe
+```
+
+The selected command changes only that add-on's manifest versions and creates
+only its `.mcaddon`; Bumblebee and Super Pickaxe remain separate installs.
 
 ## Install on iPhone
 
