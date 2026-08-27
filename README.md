@@ -1,6 +1,6 @@
 # DadModz
 
-![DadModz logo](./logo.png)
+![DadModz banner](./banner.jpg)
 
 Minecraft Bedrock add-ons: Bumblebee and Super Pickaxe.
 
