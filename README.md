@@ -23,8 +23,46 @@ npm run package         # Increment each add-on patch, then create both dist/*.m
 npm run release         # Check, then package
 ```
 
-Import the generated `.mcaddon` file into Minecraft on the iPhone using AirDrop,
-Files, or any other share target that offers Minecraft.
+## Build and package
+
+To build both Script API bundles without changing any pack versions, run:
+
+```sh
+npm run script:build
+```
+
+This creates the separate behavior-pack scripts:
+
+- `packs/bumblebee/behavior/scripts/main.js`
+- `packs/super-pickaxe/behavior/scripts/main.js`
+
+To create installable add-ons, run:
+
+```sh
+npm run package
+```
+
+`package` builds both scripts, validates JSON, increments each add-on's patch
+version independently, synchronizes its behavior/resource manifests, and writes
+two files to `dist/`:
+
+- `bumblebee-v<version>.mcaddon`
+- `super-pickaxe-v<version>.mcaddon`
+
+Run it only when you intend to create a new version: each invocation increments
+both add-ons. Bumblebee and Super Pickaxe remain separate `.mcaddon` installs.
+
+## Install on iPhone
+
+1. Build a package with `npm run package`.
+2. Send the specific `.mcaddon` from `dist/` to the iPhone using AirDrop, Files,
+   or another share target that offers Minecraft.
+3. Tap the file and choose Minecraft. Wait for the import confirmation.
+4. Create or edit a world, then enable that add-on's Behavior Pack and Resource
+   Pack in the world settings before playing.
+
+Import Bumblebee and Super Pickaxe separately; enable the pack or packs wanted
+for that world.
 
 ## Script API
 
