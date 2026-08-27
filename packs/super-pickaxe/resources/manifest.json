@@ -1,0 +1,20 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "DadModz Super Pickaxe",
+		"description": "DadModz Super Pickaxe Resource Pack",
+		"uuid": "2d9a57f5-ad4c-5ee5-3dfe-2553b678e14d",
+		"version": [1, 0, 2],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": { "authors": ["DadModz"], "generated_with": { "blockbench_item_wizard": ["1.2.4"] } },
+	"modules": [
+		{
+			"description": "DadModz Super Pickaxe",
+			"type": "resources",
+			"uuid": "8bad8f14-46c0-37bc-031e-ab5f40b3fe9e",
+			"version": [1, 0, 2]
+		}
+	],
+	"dependencies": [{ "uuid": "99f431c1-9259-f152-8e59-931d5abf6424", "version": [1, 0, 0] }]
+}

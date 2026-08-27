@@ -1,6 +1,6 @@
 # DadModz
 
-Minecraft Bedrock add-ons, currently containing the Bumblebee add-on.
+Minecraft Bedrock add-ons: Bumblebee and Super Pickaxe.
 
 ## Requirements
 
@@ -18,8 +18,8 @@ npm install
 ```sh
 npm run format          # Format JSON, TypeScript, and project config
 npm run check           # Format, lint, type-check, and Bedrock validation
-npm run script:build    # Bundle Script API TypeScript for the behavior pack
-npm run package         # Increment the patch version, then create dist/bumblebee-v<version>.mcaddon
+npm run script:build    # Bundle both Script API TypeScript sources for their behavior packs
+npm run package         # Increment each add-on patch, then create both dist/*.mcaddon files
 npm run release         # Check, then package
 ```
 
