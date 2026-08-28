@@ -4,6 +4,11 @@
 
 Minecraft Bedrock add-ons: Bumblebee and Super Pickaxe.
 
+## YouTube
+
+Watch DadModz add-on videos, updates, and gameplay on
+[YouTube](https://www.youtube.com/@dad-modz).
+
 ## Requirements
 
 - Node.js 22 or newer
