@@ -73,6 +73,17 @@ npm run package -- super-pickaxe
 The selected command changes only that add-on's manifest versions and creates
 only its `.mcaddon`; Bumblebee and Super Pickaxe remain separate installs.
 
+## Publish a release
+
+Run the **Release add-on** workflow from the Actions tab (or
+`gh workflow run release.yml -f addon=bumblebee`). It packages the chosen add-on,
+commits the version bump to `main`, and publishes a `<name>-v<version>` GitHub
+release with the `.mcaddon` attached. ivantokar.com lists the latest release of each
+add-on and rebuilds daily.
+
+CI (`.github/workflows/ci.yml`) runs lint, type-check, JSON validation, and a full
+package build on every pull request and push to `main`.
+
 ## Install on iPhone
 
 1. Build a package with `npm run package`.

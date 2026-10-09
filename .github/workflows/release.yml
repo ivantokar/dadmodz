@@ -1,0 +1,64 @@
+name: Release add-on
+
+on:
+  workflow_dispatch:
+    inputs:
+      addon:
+        description: Add-on to release
+        required: true
+        type: choice
+        options:
+          - bumblebee
+          - super-pickaxe
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ inputs.addon }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+
+      # Bumps this add-on's patch version, syncs its manifests and writes dist/<addon>-v<version>.mcaddon.
+      - name: Package
+        run: npm run package -- "${{ inputs.addon }}"
+
+      - name: Resolve release file
+        id: build
+        run: |
+          file=$(ls dist/"${{ inputs.addon }}"-v*.mcaddon)
+          test "$(echo "$file" | wc -l)" -eq 1
+          tag=$(basename "$file" .mcaddon)
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packs
+          git commit -m "chore: release ${{ steps.build.outputs.tag }}"
+          git push origin HEAD:main
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.build.outputs.tag }}" "${{ steps.build.outputs.file }}" \
+            --target main \
+            --title "${{ steps.build.outputs.tag }}" \
+            --generate-notes
