@@ -4,7 +4,7 @@
 		"name": "DadModz Bumblebee",
 		"description": "DadModz Bumblebee Behavior Pack",
 		"uuid": "7db3d9b9-7e25-d24a-b3dd-aaf26ac968ff",
-		"version": [1, 0, 17],
+		"version": [1, 0, 18],
 		"min_engine_version": [1, 16, 0]
 	},
 	"metadata": {
@@ -14,7 +14,7 @@
 	"modules": [
 		{
 			"description": "Behavior",
-			"version": [1, 0, 17],
+			"version": [1, 0, 18],
 			"uuid": "6b5421a7-8886-c5cb-59b2-23cc8ff099f1",
 			"type": "data"
 		},
@@ -22,12 +22,12 @@
 			"description": "DadModz Bumblebee Script",
 			"type": "script",
 			"uuid": "e15787eb-8d6a-433f-a944-c1a1f5850fd6",
-			"version": [1, 0, 17],
+			"version": [1, 0, 18],
 			"entry": "scripts/main.js"
 		}
 	],
 	"dependencies": [
-		{ "uuid": "2da15e3f-44db-4bf7-8769-7ed59fa85cb2", "version": [1, 0, 17] },
+		{ "uuid": "2da15e3f-44db-4bf7-8769-7ed59fa85cb2", "version": [1, 0, 18] },
 		{ "module_name": "@minecraft/server", "version": "2.9.0" }
 	]
 }
