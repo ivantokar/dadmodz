@@ -46,19 +46,32 @@ jobs:
           echo "file=$file" >> "$GITHUB_OUTPUT"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
 
+      # `main` only accepts pull requests, so the version bump goes to a release branch.
       - name: Commit version bump
+        id: bump
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "release/${{ steps.build.outputs.tag }}"
           git add packs
           git commit -m "chore: release ${{ steps.build.outputs.tag }}"
-          git push origin HEAD:main
+          git push origin HEAD
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${{ steps.build.outputs.tag }}" "${{ steps.build.outputs.file }}" \
-            --target main \
+            --target "${{ steps.bump.outputs.sha }}" \
             --title "${{ steps.build.outputs.tag }}" \
             --generate-notes
+
+      # Needs Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests".
+      - name: Open version bump pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr create --base main --head "release/${{ steps.build.outputs.tag }}" \
+            --title "chore: release ${{ steps.build.outputs.tag }}" \
+            --body "Version bump for the ${{ steps.build.outputs.tag }} release. Merge it so the next release continues from this version."

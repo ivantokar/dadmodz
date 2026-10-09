@@ -77,8 +77,8 @@ only its `.mcaddon`; Bumblebee and Super Pickaxe remain separate installs.
 
 Run the **Release add-on** workflow from the Actions tab (or
 `gh workflow run release.yml -f addon=bumblebee`). It packages the chosen add-on,
-commits the version bump to `main`, and publishes a `<name>-v<version>` GitHub
-release with the `.mcaddon` attached. ivantokar.com lists the latest release of each
+pushes the version bump to a `release/<tag>` branch, publishes a `<name>-v<version>` GitHub
+release with the `.mcaddon` attached, and opens a pull request for the bump (merge it before the next release). ivantokar.com lists the latest release of each
 add-on and rebuilds daily.
 
 CI (`.github/workflows/ci.yml`) runs lint, type-check, JSON validation, and a full
