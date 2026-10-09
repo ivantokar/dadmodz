@@ -8,18 +8,10 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 const packsRoot = path.join(projectRoot, 'packs');
 const outputRoot = path.join(projectRoot, 'dist');
 
-const addOns = [
-	{
-		name: 'bumblebee',
-		behavior: 'bumblebee_BP',
-		resources: 'bumblebee_RP'
-	},
-	{
-		name: 'super-pickaxe',
-		behavior: 'super-pickaxe_BP',
-		resources: 'super-pickaxe_RP'
-	}
-];
+// Every packs/<name> directory is an add-on; its archive folders are <name>_BP and <name>_RP.
+const addOns = (await fs.readdir(packsRoot, { withFileTypes: true }))
+	.filter((entry) => entry.isDirectory())
+	.map(({ name }) => ({ name, behavior: `${name}_BP`, resources: `${name}_RP` }));
 const requestedAddOn = process.argv.slice(2);
 
 if (requestedAddOn.length > 1) {

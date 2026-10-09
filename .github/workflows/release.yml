@@ -12,12 +12,9 @@ on:
   workflow_dispatch:
     inputs:
       addon:
-        description: Add-on to release
+        description: Add-on folder name under packs/, e.g. bumblebee
         required: true
-        type: choice
-        options:
-          - bumblebee
-          - super-pickaxe
+        type: string
 
 permissions:
   contents: write
@@ -37,11 +34,13 @@ jobs:
           BEFORE: ${{ github.event.before }}
         run: |
           if [ -n "$INPUT_ADDON" ]; then
+            test -d "packs/$INPUT_ADDON" || { echo "No add-on packs/$INPUT_ADDON"; exit 1; }
             addons="$INPUT_ADDON"
           else
             changed=$(git diff --name-only "$BEFORE" "$GITHUB_SHA")
             addons=""
-            for addon in bumblebee super-pickaxe; do
+            for dir in packs/*/; do
+              addon=$(basename "$dir")
               if echo "$changed" | grep -qE "^(packs/$addon/|scripts/src/$addon\.ts$)"; then
                 addons="$addons $addon"
               fi
