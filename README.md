@@ -85,6 +85,8 @@ the manifests in the repository can lag behind the released version. To re-relea
 manually, run the workflow from the Actions tab or
 `gh workflow run release.yml -f addon=bumblebee`.
 
+Add a new add-on by creating `packs/<name>/` (with `behavior/` and `resources/`) and, for scripts, `scripts/src/<name>.ts`; packaging and releases discover it automatically.
+
 CI (`.github/workflows/ci.yml`) runs lint, type-check, JSON validation, and a full
 package build on every pull request and push to `main`.
 
