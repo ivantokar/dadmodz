@@ -73,6 +73,19 @@ npm run package -- super-pickaxe
 The selected command changes only that add-on's manifest versions and creates
 only its `.mcaddon`; Bumblebee and Super Pickaxe remain separate installs.
 
+## Publish a release
+
+After packaging and committing the version bump, publish the add-on to GitHub
+Releases (ivantokar.com lists the latest release of each add-on and rebuilds daily):
+
+```sh
+npm run publish:release -- bumblebee
+npm run publish:release -- super-pickaxe
+```
+
+This creates a `<name>-v<version>` release with the newest `dist/*.mcaddon` attached.
+Requires the `gh` CLI.
+
 ## Install on iPhone
 
 1. Build a package with `npm run package`.

@@ -17,7 +17,8 @@
 		"validate": "MCTOOLS_DATA_DIR=.mctools mct validate addon -i .",
 		"check": "npm run format:check && npm run lint && npm run typecheck && npm run validate:json && npm run validate",
 		"package": "npm run script:build && npm run validate:json && node tools/package-mcaddon.mjs",
-		"release": "npm run check && npm run package"
+		"release": "npm run check && npm run package",
+		"publish:release": "node tools/publish-release.mjs"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.34.0",
