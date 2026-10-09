@@ -75,16 +75,14 @@ only its `.mcaddon`; Bumblebee and Super Pickaxe remain separate installs.
 
 ## Publish a release
 
-After packaging and committing the version bump, publish the add-on to GitHub
-Releases (ivantokar.com lists the latest release of each add-on and rebuilds daily):
+Run the **Release add-on** workflow from the Actions tab (or
+`gh workflow run release.yml -f addon=bumblebee`). It packages the chosen add-on,
+commits the version bump to `main`, and publishes a `<name>-v<version>` GitHub
+release with the `.mcaddon` attached. ivantokar.com lists the latest release of each
+add-on and rebuilds daily.
 
-```sh
-npm run publish:release -- bumblebee
-npm run publish:release -- super-pickaxe
-```
-
-This creates a `<name>-v<version>` release with the newest `dist/*.mcaddon` attached.
-Requires the `gh` CLI.
+CI (`.github/workflows/ci.yml`) runs lint, type-check, JSON validation, and a full
+package build on every pull request and push to `main`.
 
 ## Install on iPhone
 
