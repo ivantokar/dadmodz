@@ -18,6 +18,11 @@ const addOns = [
 		name: 'super-pickaxe',
 		behavior: 'super-pickaxe_BP',
 		resources: 'super-pickaxe_RP'
+	},
+	{
+		name: 'crustbreaker-pickaxe',
+		behavior: 'crustbreaker-pickaxe_BP',
+		resources: 'crustbreaker-pickaxe_RP'
 	}
 ];
 const requestedAddOn = process.argv.slice(2);

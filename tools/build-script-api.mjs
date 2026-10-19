@@ -12,6 +12,10 @@ const scriptTargets = [
 	{
 		source: 'scripts/src/super-pickaxe.ts',
 		output: 'packs/super-pickaxe/behavior/scripts/main.js'
+	},
+	{
+		source: 'scripts/src/crustbreaker-pickaxe.ts',
+		output: 'packs/crustbreaker-pickaxe/behavior/scripts/main.js'
 	}
 ];
 

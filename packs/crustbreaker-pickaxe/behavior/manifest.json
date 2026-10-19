@@ -1,0 +1,31 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "DadModz Crustbreaker Pickaxe",
+		"description": "DadModz Crustbreaker Pickaxe Behavior Pack",
+		"uuid": "b50f1f71-2e8f-48d9-b3dd-c54d1a03a968",
+		"version": [1, 0, 2],
+		"min_engine_version": [1, 20, 0]
+	},
+	"metadata": { "authors": ["DadModz"] },
+	"modules": [
+		{
+			"description": "Behavior",
+			"version": [1, 0, 2],
+			"uuid": "b2257cf1-9b39-46c6-8d0e-6f1c2a9b7e45",
+			"type": "data"
+		},
+		{
+			"description": "DadModz Crustbreaker Pickaxe Script",
+			"type": "script",
+			"language": "javascript",
+			"uuid": "b33d7d2f-e606-4e1b-9f87-565692a4136f",
+			"version": [1, 0, 2],
+			"entry": "scripts/main.js"
+		}
+	],
+	"dependencies": [
+		{ "uuid": "c1364c96-3dd2-4ffe-ba9d-f29433cc481a", "version": [1, 0, 2] },
+		{ "module_name": "@minecraft/server", "version": "2.9.0" }
+	]
+}
