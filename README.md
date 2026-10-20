@@ -2,7 +2,7 @@
 
 ![DadModz banner](./banner.jpg)
 
-Minecraft Bedrock add-ons by DadModz, built with the Script API.
+Minecraft Bedrock add-ons by DadModz: a pet bee, a pickaxe that tunnels, and a pickaxe that cracks the ground open with TNT.
 
 ## 🧩 Add-ons
 
@@ -33,8 +33,8 @@ Each add-on is a separate install; enable only the ones you want in a world.
 > activate the new ones.
 
 > [!NOTE]
-> The scripts target `@minecraft/server` 2.9.0, so use a Minecraft version that
-> supports it. Do not use these add-ons on a world you care about without a backup.
+> Use an up-to-date Minecraft Bedrock. The pickaxes change and destroy terrain,
+> so make a backup before using them in a world you care about.
 
 ## 🎮 How to play
 
@@ -75,6 +75,6 @@ crack is destroyed, so try it in a test world first.
 Watch DadModz add-on videos, updates, and gameplay on
 [YouTube](https://www.youtube.com/@dad-modz).
 
-## 🤝 Contributing
+---
 
-Building, packaging, and releasing are covered in [CONTRIBUTING.md](./CONTRIBUTING.md).
+Want to build the add-ons yourself? See [CONTRIBUTING.md](./CONTRIBUTING.md).
