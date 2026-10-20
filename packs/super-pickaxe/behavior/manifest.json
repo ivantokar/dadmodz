@@ -4,14 +4,14 @@
 		"name": "DadModz Super Pickaxe",
 		"description": "DadModz Super Pickaxe Behavior Pack",
 		"uuid": "99f431c1-9259-f152-8e59-931d5abf6424",
-		"version": [1, 0, 10],
+		"version": [1, 0, 11],
 		"min_engine_version": [1, 20, 0]
 	},
 	"metadata": { "authors": ["DadModz"], "generated_with": { "blockbench_item_wizard": ["1.2.4"] } },
 	"modules": [
 		{
 			"description": "Behavior",
-			"version": [1, 0, 10],
+			"version": [1, 0, 11],
 			"uuid": "93c46c6d-f10d-ada8-1d3f-8f2ee1657942",
 			"type": "data"
 		},
@@ -20,12 +20,12 @@
 			"type": "script",
 			"language": "javascript",
 			"uuid": "2a193c41-7968-4bd0-9161-09a71991b5dc",
-			"version": [1, 0, 10],
+			"version": [1, 0, 11],
 			"entry": "scripts/main.js"
 		}
 	],
 	"dependencies": [
-		{ "uuid": "2d9a57f5-ad4c-5ee5-3dfe-2553b678e14d", "version": [1, 0, 10] },
+		{ "uuid": "2d9a57f5-ad4c-5ee5-3dfe-2553b678e14d", "version": [1, 0, 11] },
 		{ "module_name": "@minecraft/server", "version": "2.9.0" }
 	]
 }

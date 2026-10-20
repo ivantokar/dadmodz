@@ -1,0 +1,103 @@
+name: Release add-ons
+
+# Merging a change to an add-on into main publishes its next GitHub release.
+# The version comes from the latest release (patch + 1) and is stamped only into
+# the built package, so nothing is committed back to the protected main branch.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packs/**'
+      - 'scripts/src/**'
+  workflow_dispatch:
+    inputs:
+      addon:
+        description: Add-on folder name under packs/, e.g. bumblebee
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      addons: ${{ steps.detect.outputs.addons }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: detect
+        env:
+          INPUT_ADDON: ${{ inputs.addon }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ -n "$INPUT_ADDON" ]; then
+            test -d "packs/$INPUT_ADDON" || { echo "No add-on packs/$INPUT_ADDON"; exit 1; }
+            addons="$INPUT_ADDON"
+          else
+            changed=$(git diff --name-only "$BEFORE" "$GITHUB_SHA")
+            addons=""
+            for dir in packs/*/; do
+              addon=$(basename "$dir")
+              if echo "$changed" | grep -qE "^(packs/$addon/|scripts/src/$addon\.ts$)"; then
+                addons="$addons $addon"
+              fi
+            done
+          fi
+          json=$(echo $addons | tr ' ' '\n' | jq -R . | jq -sc 'map(select(length > 0))')
+          echo "addons=$json" >> "$GITHUB_OUTPUT"
+
+  release:
+    needs: detect
+    if: needs.detect.outputs.addons != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        addon: ${{ fromJSON(needs.detect.outputs.addons) }}
+    concurrency:
+      group: release-${{ matrix.addon }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+
+      # package-mcaddon.mjs increments the manifest version, so start from whichever
+      # is higher: the repository manifest or the latest published release.
+      - name: Start from the latest released version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ADDON: ${{ matrix.addon }}
+        run: |
+          manifest="packs/$ADDON/behavior/manifest.json"
+          current=$(node -p "require('./$manifest').header.version.join('.')")
+          latest=$(gh release list --limit 100 --json tagName --jq ".[].tagName | select(startswith(\"$ADDON-v\")) | ltrimstr(\"$ADDON-v\")" | sort -V | tail -1)
+          highest=$(printf '%s\n%s\n' "$current" "$latest" | sed '/^$/d' | sort -V | tail -1)
+          echo "manifest=$current latest=${latest:-none} start=$highest"
+          node -e "
+            const fs = require('fs');
+            const file = process.argv[1];
+            const manifest = JSON.parse(fs.readFileSync(file, 'utf8'));
+            manifest.header.version = process.argv[2].split('.').map(Number);
+            fs.writeFileSync(file, JSON.stringify(manifest));
+          " "$manifest" "$highest"
+
+      - run: npm run package -- "${{ matrix.addon }}"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ADDON: ${{ matrix.addon }}
+        run: |
+          file=$(ls dist/"$ADDON"-v*.mcaddon)
+          test "$(echo "$file" | wc -l)" -eq 1
+          tag=$(basename "$file" .mcaddon)
+          gh release create "$tag" "$file" --target "$GITHUB_SHA" --title "$tag" --generate-notes

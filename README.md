@@ -9,6 +9,11 @@ Minecraft Bedrock add-ons: Bumblebee, Super Pickaxe, and Crustbreaker Pickaxe.
 Watch DadModz add-on videos, updates, and gameplay on
 [YouTube](https://www.youtube.com/@dad-modz).
 
+## YouTube
+
+Watch DadModz add-on videos, updates, and gameplay on
+[YouTube](https://www.youtube.com/@dad-modz).
+
 ## Requirements
 
 - Node.js 22 or newer
@@ -74,6 +79,23 @@ npm run package -- crustbreaker-pickaxe
 
 The selected command changes only that add-on's manifest versions and creates
 only its `.mcaddon`; Bumblebee and Super Pickaxe remain separate installs.
+
+## Publish a release
+
+Releases are automatic. Merging a change under `packs/<add-on>/` or
+`scripts/src/<add-on>.ts` into `main` runs **Release add-ons**, which publishes a
+`<name>-v<version>` GitHub release with the `.mcaddon` attached.
+
+The version is the latest release of that add-on plus one patch. It is stamped only
+into the built package; nothing is committed back to the protected `main` branch, so
+the manifests in the repository can lag behind the released version. To re-release
+manually, run the workflow from the Actions tab or
+`gh workflow run release.yml -f addon=bumblebee`.
+
+Add a new add-on by creating `packs/<name>/` (with `behavior/` and `resources/`) and, for scripts, `scripts/src/<name>.ts`; packaging and releases discover it automatically.
+
+CI (`.github/workflows/ci.yml`) runs lint, type-check, JSON validation, and a full
+package build on every pull request and push to `main`.
 
 ## Install on iPhone
 
