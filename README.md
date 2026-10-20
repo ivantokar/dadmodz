@@ -8,128 +8,73 @@ Minecraft Bedrock add-ons by DadModz, built with the Script API.
 
 | Add-on                  | What it does                                                                   |
 | ----------------------- | ------------------------------------------------------------------------------ |
-| 🐝 Bumblebee            | A bumblebee entity with custom model, animations, and textures                 |
+| 🐝 Bumblebee            | A tameable flying bumblebee that follows you and poisons what it attacks       |
 | ⛏️ Super Pickaxe        | Mines a 3×3 tunnel 100 blocks long in the direction you are facing             |
 | 💥 Crustbreaker Pickaxe | Strike the ground to open a branching crack of TNT that detonates in a cascade |
 
 ## 📥 Download
 
-Get the add-ons at [ivantokar.com/dadmodz](https://ivantokar.com/dadmodz/).
+Get the add-ons at [ivantokar.com/dadmodz](https://ivantokar.com/dadmodz/), or
+grab the latest `.mcaddon` files from the
+[GitHub releases](https://github.com/ivantokar/dadmodz/releases).
+
+## 📱 Install
+
+1. Download the `.mcaddon` for the add-on you want.
+2. Open it on your device and choose Minecraft. Wait for the import confirmation.
+3. Create or edit a world, then enable that add-on's **Behavior Pack** and
+   **Resource Pack** in the world settings.
+
+Each add-on is a separate install; enable only the ones you want in a world.
+
+> [!TIP]
+> Updated an add-on but nothing changed? Worlds keep their own copy of a pack.
+> Deactivate the old Behavior and Resource Packs in the world settings and
+> activate the new ones.
+
+> [!NOTE]
+> The scripts target `@minecraft/server` 2.9.0, so use a Minecraft version that
+> supports it. Do not use these add-ons on a world you care about without a backup.
+
+## 🎮 How to play
+
+### 🐝 Bumblebee
+
+<!-- TODO: add a screenshot, e.g. ./docs/images/bumblebee.png -->
+
+Spawn it with the Bumblebee spawn egg. Give it a flower to tame it; a tamed
+bumblebee follows you and attacks what you or it attacks. Every hit poisons the
+target for 5 seconds.
+
+### ⛏️ Super Pickaxe
+
+<!-- TODO: add a screenshot, e.g. ./docs/images/super-pickaxe.png -->
+
+Find it in the creative inventory under Equipment. Break any block and it digs a
+3×3 tunnel, 100 blocks long, in the direction you are looking. Bedrock, command
+blocks, and other protected blocks are left alone.
+
+### 💥 Crustbreaker Pickaxe
+
+<!-- TODO: add a GIF of the cascade, e.g. ./docs/images/crustbreaker-pickaxe.gif -->
+
+Find it in the creative inventory under Equipment.
+
+1. **Strike:** break a block on the ground under your feet.
+2. **Crack:** a zigzag crack of TNT, 25 blocks long with small side branches,
+   spreads ahead of you.
+3. **Countdown:** `DETONATION IN 3… 2… 1` appears on screen.
+4. **Cascade:** the TNT blows up one block at a time, from you outward, every
+   0.1 seconds.
+
+You are protected from the blasts while the sequence runs. Terrain around the
+crack is destroyed, so try it in a test world first.
 
 ## 🎬 YouTube
 
 Watch DadModz add-on videos, updates, and gameplay on
 [YouTube](https://www.youtube.com/@dad-modz).
 
-## 📋 Requirements
+## 🤝 Contributing
 
-- Node.js 22 or newer
-- Minecraft Bedrock on an iPhone for import and in-game testing
-
-Install the project tools once:
-
-```sh
-npm install
-```
-
-## 🛠️ Development commands
-
-```sh
-npm run format          # Format JSON, TypeScript, and project config
-npm run check           # Format, lint, type-check, and Bedrock validation
-npm run script:build    # Bundle every Script API TypeScript sources for their behavior packs
-npm run package         # Increment each add-on patch, then create every dist/*.mcaddon file
-npm run package -- bumblebee       # Increment and package Bumblebee only
-npm run package -- super-pickaxe   # Increment and package Super Pickaxe only
-npm run package -- crustbreaker-pickaxe   # Increment and package Crustbreaker Pickaxe only
-npm run release         # Check, then package
-```
-
-## 📦 Build and package
-
-To build every Script API bundle without changing any pack versions, run:
-
-```sh
-npm run script:build
-```
-
-This builds each add-on source into its separate behavior-pack script:
-
-- `scripts/src/bumblebee.ts` → `packs/bumblebee/behavior/scripts/main.js`
-- `scripts/src/super-pickaxe.ts` → `packs/super-pickaxe/behavior/scripts/main.js`
-- `scripts/src/crustbreaker-pickaxe.ts` → `packs/crustbreaker-pickaxe/behavior/scripts/main.js`
-
-To create installable add-ons, run:
-
-```sh
-npm run package
-```
-
-`package` builds the scripts, validates JSON, increments each add-on's patch
-version independently, synchronizes its behavior/resource manifests, and writes
-one file per add-on to `dist/`:
-
-- `bumblebee-v<version>.mcaddon`
-- `super-pickaxe-v<version>.mcaddon`
-- `crustbreaker-pickaxe-v<version>.mcaddon`
-
-Run it only when you intend to create a new version: with no add-on name, it
-increments every add-on.
-
-### 🎯 Package one add-on
-
-To bump and archive just one add-on, pass its name after `--`:
-
-```sh
-npm run package -- bumblebee
-npm run package -- super-pickaxe
-npm run package -- crustbreaker-pickaxe
-```
-
-The selected command changes only that add-on's manifest versions and creates
-only its `.mcaddon`; each add-on remains a separate install.
-
-## 🚀 Publish a release
-
-Releases are automatic. Merging a change under `packs/<add-on>/` or
-`scripts/src/<add-on>.ts` into `main` runs **Release add-ons**, which publishes a
-`<name>-v<version>` GitHub release with the `.mcaddon` attached.
-
-The version is the latest release of that add-on plus one patch. It is stamped only
-into the built package; nothing is committed back to the protected `main` branch, so
-the manifests in the repository can lag behind the released version. To re-release
-manually, run the workflow from the Actions tab or
-`gh workflow run release.yml -f addon=bumblebee`.
-
-Add a new add-on by creating `packs/<name>/` (with `behavior/` and `resources/`)
-and, for scripts, `scripts/src/<name>.ts`; packaging and releases discover it
-automatically.
-
-CI (`.github/workflows/ci.yml`) runs lint, type-check, JSON validation, and a full
-package build on every pull request and push to `main`.
-
-## 📱 Install on iPhone
-
-1. Build a package with `npm run package`.
-2. Send the specific `.mcaddon` from `dist/` to the iPhone using AirDrop, Files,
-   or another share target that offers Minecraft.
-3. Tap the file and choose Minecraft. Wait for the import confirmation.
-4. Create or edit a world, then enable that add-on's Behavior Pack and Resource
-   Pack in the world settings before playing.
-
-Import each add-on separately; enable the pack or packs wanted for that world.
-
-## 📜 Script API
-
-Write future Script API sources in `scripts/src/`. `@minecraft/server` provides
-the TypeScript definitions, while ESLint and the Minecraft lint rules catch common
-issues before packaging.
-
-Before shipping a Script API feature, add a JavaScript script module and matching
-`@minecraft/server` dependency to the behavior-pack manifest. Pin its version to
-the Minecraft version installed on the test iPhone; do not use beta APIs unless the
-test device is running Minecraft Preview.
-
-`npm run validate` runs Creator Tools' strict cooperative-add-on audit. Its current
-findings document legacy content conventions and do not prevent `npm run package`
-from creating the iPhone-importable add-on.
+Building, packaging, and releasing are covered in [CONTRIBUTING.md](./CONTRIBUTING.md).
