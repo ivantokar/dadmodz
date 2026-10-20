@@ -1,0 +1,19 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "DadModz Crustbreaker Pickaxe",
+		"description": "DadModz Crustbreaker Pickaxe Resource Pack",
+		"uuid": "c1364c96-3dd2-4ffe-ba9d-f29433cc481a",
+		"version": [1, 0, 2],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": { "authors": ["DadModz"] },
+	"modules": [
+		{
+			"description": "DadModz Crustbreaker Pickaxe",
+			"type": "resources",
+			"uuid": "03195784-560b-4133-808e-61403598a561",
+			"version": [1, 0, 2]
+		}
+	]
+}

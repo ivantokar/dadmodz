@@ -2,7 +2,12 @@
 
 ![DadModz banner](./banner.jpg)
 
-Minecraft Bedrock add-ons: Bumblebee and Super Pickaxe.
+Minecraft Bedrock add-ons: Bumblebee, Super Pickaxe, and Crustbreaker Pickaxe.
+
+## YouTube
+
+Watch DadModz add-on videos, updates, and gameplay on
+[YouTube](https://www.youtube.com/@dad-modz).
 
 ## YouTube
 
@@ -44,6 +49,7 @@ This builds each add-on source into its separate behavior-pack script:
 
 - `scripts/src/bumblebee.ts` → `packs/bumblebee/behavior/scripts/main.js`
 - `scripts/src/super-pickaxe.ts` → `packs/super-pickaxe/behavior/scripts/main.js`
+- `scripts/src/crustbreaker-pickaxe.ts` → `packs/crustbreaker-pickaxe/behavior/scripts/main.js`
 
 To create installable add-ons, run:
 
@@ -68,6 +74,7 @@ To bump and archive just one add-on, pass its name after `--`:
 ```sh
 npm run package -- bumblebee
 npm run package -- super-pickaxe
+npm run package -- crustbreaker-pickaxe
 ```
 
 The selected command changes only that add-on's manifest versions and creates
