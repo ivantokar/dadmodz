@@ -4,10 +4,9 @@
 
 Minecraft Bedrock add-ons: Bumblebee, Super Pickaxe, and Crustbreaker Pickaxe.
 
-## YouTube
+## Download
 
-Watch DadModz add-on videos, updates, and gameplay on
-[YouTube](https://www.youtube.com/@dad-modz).
+Get the add-ons at [ivantokar.com/dadmodz](https://ivantokar.com/dadmodz/).
 
 ## YouTube
 
